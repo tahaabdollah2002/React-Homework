@@ -6,35 +6,65 @@ class Timer extends React.Component{
     constructor(){
         super()
         this.state = {
-            time: 10
+            hour: 0,
+            minute: 0,
+            second: 0,
+            isStart: false
         }
-    }
-    componentDidUpdate(){
-        if(this.state.time == 0){
-            clearInterval(interval)
-        }
-    }
-    stop = () => {
-        clearInterval(interval)
     }
     start = () => {
+        if(this.state.isStart == false){
+            this.setState({
+                isStart: true
+            })
+        }
         interval = setInterval(() => {
             this.setState({
-                time: this.state.time - 1
+                second: this.state.second + 1
             })
+            if(this.state.second == 60){
+                this.setState({
+                    second: 0,
+                    minute: this.state.minute + 1
+                })
+            }
+            if(this.state.minute == 60){
+                this.setState({
+                    minute: 0,
+                    hour: this.state.hour + 1
+                })
+            }
         }, 1000);
     }
+    stop = () => {
+        this.setState({
+            isStart: false
+        })
+        clearInterval(interval)
+    }
+    reset = () => {
+        this.stop();
+        this.setState({
+            hour: 0,
+            minute: 0,
+            second: 0
+        })
+    }
     render(){
+        let h = this.state.hour;
+        let m = this.state.minute;
+        let s = this.state.second;
         return(
             <React.Fragment>
                 <div className="timer">
                     <h1>
-                        it is {this.state.time}
+                        {`${h > 9 ? h : '0' + h} : ${m > 9 ? m : '0' + m} : ${s > 9 ? s : '0' + s}`}
                     </h1>
                 </div>
                 <div>
-                    <button className="btn" onClick={this.start}>Start</button>
-                    <button className="btn" onClick={this.stop}>Stop</button>
+                    <button className="btn btn-start" onClick={this.start}>Start</button>
+                    <button className="btn btn-reset" onClick={this.reset}>Reset</button>
+                    <button className="btn btn-stop" onClick={this.stop}>Stop</button>
                 </div>
             </React.Fragment>
         )
