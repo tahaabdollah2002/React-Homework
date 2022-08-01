@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import './style.css'
 
 var interval;
@@ -65,6 +65,7 @@ class Timer extends React.Component{
                     <button className="btn btn-start" onClick={this.start}>Start</button>
                     <button className="btn btn-reset" onClick={this.reset}>Reset</button>
                     <button className="btn btn-stop" onClick={this.stop}>Stop</button>
+                    <button className="btn btn-change" style={{background: this.props.isLight ? 'black' : 'white' , color: this.props.isLight ? 'white' : 'black'}} onClick={this.props.turn}>{this.props.isLight ? "turn dark" : 'turn light'}</button>
                 </div>
             </React.Fragment>
         )

@@ -11,7 +11,7 @@
     align-items: center;
     flex-direction: column;
     color: chocolate;
-    background: rgb(20, 26, 54);
+    background: black;
 }
 .timer{
     color: chocolate;
@@ -22,7 +22,8 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    box-shadow: 0 0 20px rgb(123, 218, 241);
+    margin: 20px 0 0 0;
+    box-shadow: 0 0 20px blue;
 }
 .btn{
     margin: 35px 15px;
@@ -45,6 +46,9 @@
 .btn-reset{
     background-color: gray;
 }
+.btn-change{
+    background-color: rgb(216, 216, 23);
+}
 .btn-start:hover{
     background-color: green;
 }
@@ -53,4 +57,7 @@
 }
 .btn-reset:hover{
     background-color: rgb(88, 88, 88);
+}
+.btn-change:hover{
+    background-color: rgb(173, 173, 6);
 }
