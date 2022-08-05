@@ -1,6 +1,7 @@
 import React from "react"
 import Timelist from "./Timelist";
 import './style.css'
+import { TestContext } from "./testContext";
 
 var interval;
 class Timer extends React.Component{
@@ -13,6 +14,7 @@ class Timer extends React.Component{
             isStart: false
         }
     }
+    static contextType = TestContext;
     start = () => {
         if(this.state.isStart === false){
             this.setState({
@@ -52,11 +54,8 @@ class Timer extends React.Component{
         })
     }
     handleTimeSave = () =>{
-        let h = this.state.hour;
-        let m = this.state.minute;
-        let s = this.state.second;
-        let newTime = `${h > 9 ? h : '0' + h} : ${m > 9 ? m : '0' + m} : ${s > 9 ? s : '0' + s}`;
-        this.props.setTimeArr([...this.props.timeArr, newTime])
+        let newTime = document.querySelector('.timer').innerHTML;
+        this.context.setTimeArr([...this.context.timeArr, newTime])
     }
     render(){
         let h = this.state.hour;
@@ -64,20 +63,15 @@ class Timer extends React.Component{
         let s = this.state.second;
         return(
             <React.Fragment>
-                <div className="timer" onClick={this.handleTimeSave}>
-                    <h1>
-                        {`${h > 9 ? h : '0' + h} : ${m > 9 ? m : '0' + m} : ${s > 9 ? s : '0' + s}`}
-                    </h1>
-                </div>
+                <h1 className="timer" onClick={this.handleTimeSave}>
+                    {`${h > 9 ? h : '0' + h} : ${m > 9 ? m : '0' + m} : ${s > 9 ? s : '0' + s}`}
+                </h1>
                 <div>
                     <button className="btn btn-start" onClick={this.start}>Start</button>
                     <button className="btn btn-reset" onClick={this.reset}>Reset</button>
                     <button className="btn btn-stop" onClick={this.stop}>Stop</button>
                     <button className="btn btn-change" style={{background: this.props.isLight ? 'black' : 'white' , color: this.props.isLight ? 'white' : 'black'}} onClick={this.props.turn}>{this.props.isLight ? "turn dark" : 'turn light'}</button>
                 </div>
-                <Timelist>
-                    {this.props.timeArr}
-                </Timelist>
             </React.Fragment>
         )
     }

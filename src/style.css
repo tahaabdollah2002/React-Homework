@@ -67,3 +67,16 @@
 .btn-change:hover{
     background-color: rgb(173, 173, 6);
 }
+.main_time_list{
+    margin-top: 0.5rem;
+}
+.time-item{
+    font-family: fantasy;
+    letter-spacing: 3px;
+    padding: 0.3rem 0;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+.time-item:hover{
+    filter: drop-shadow(0 0 3px orange);
+}
